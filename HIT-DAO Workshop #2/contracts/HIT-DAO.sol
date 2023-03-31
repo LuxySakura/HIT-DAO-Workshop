@@ -60,28 +60,28 @@ contract HIT_DAO is AccessControlEnumerable, CRC721Enumerable, InternalContracts
         _tokenIds = tokenId+1;
     }
 
-    /**
-     * @dev Batch version of mint function
-     */
-    function mintBatch(address to, uint256 amount) public virtual {
-        require(hasRole(MINTER_ROLE, _msgSender()), "CRC721NatureAutoId: must have minter role to mint");
-        uint256 tokenId = _tokenIds;
-        for (uint256 index = 0; index < amount; ++index) _mint(to, tokenId + index);
-        _tokenIds = tokenId + amount;
-    }
+//    /**
+//     * @dev Batch version of mint function
+//     */
+//    function mintBatch(address to, uint256 amount) public virtual {
+//        require(hasRole(MINTER_ROLE, _msgSender()), "CRC721NatureAutoId: must have minter role to mint");
+//        uint256 tokenId = _tokenIds;
+//        for (uint256 index = 0; index < amount; ++index) _mint(to, tokenId + index);
+//        _tokenIds = tokenId + amount;
+//    }
 
-    //chy:Batch airdrop method, giving a group of accounts each airdrop 1 nft with a parsimonious id.
-    function batchAddItemByAddress(address[] calldata _initialOwners)
-    public
-    {
-        require(hasRole(MINTER_ROLE, _msgSender()), "CRC721NatureAutoId: must have minter role to mint");
-        uint256 _length = _initialOwners.length;
-        uint256 tokenId = _tokenIds;
-        for (uint256 i = 0; i < _length; ++i) {
-            _mint(_initialOwners[i], tokenId + i);
-        }
-        _tokenIds = tokenId + _length;
-    }
+//    //chy:Batch airdrop method, giving a group of accounts each airdrop 1 nft with a parsimonious id.
+//    function batchAddItemByAddress(address[] calldata _initialOwners)
+//    public
+//    {
+//        require(hasRole(MINTER_ROLE, _msgSender()), "CRC721NatureAutoId: must have minter role to mint");
+//        uint256 _length = _initialOwners.length;
+//        uint256 tokenId = _tokenIds;
+//        for (uint256 i = 0; i < _length; ++i) {
+//            _mint(_initialOwners[i], tokenId + i);
+//        }
+//        _tokenIds = tokenId + _length;
+//    }
 
     function supportsInterface(bytes4 interfaceId) public view virtual override(AccessControlEnumerable, ERC721Enumerable) returns (bool) {
         return AccessControlEnumerable.supportsInterface(interfaceId) || ERC721Enumerable.supportsInterface(interfaceId);
